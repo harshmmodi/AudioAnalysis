@@ -1,6 +1,7 @@
-import scipy
 import keras
+import imageio
 import numpy as np
+from scipy.io import wavfile
 import matplotlib.pyplot as plt
 
 def plot_labels_(subplot, xlabel='', ylabel=''):
@@ -92,15 +93,16 @@ def load_data(files):
     x_train = []
     y_train = []
     for filename in files:
-        image = scipy.misc.load(filename)
+        image = imageio.imread(filename)
         x_train.append(image)
+        # resize image to 224x224x3
         # y_labels are 1 or 0 based on if it is
         # the sound of horn or not
         y_train.append(1)
     return (np.array(x_train), np.array(y_train))
 
 def main():
-    # sample_rate, samples = scipy.io.wavfile.read('cars014.wav')
+    # sample_rate, samples = wavfile.read('cars014.wav')
     # plt.set_cmap('hot')
     # # plot_data(sample_rate, samples)
     # save_specgram(sample_rate, samples, 'cars014.png')
